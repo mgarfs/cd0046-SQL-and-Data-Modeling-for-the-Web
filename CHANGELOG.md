@@ -74,3 +74,7 @@ Updated app.py
 # Artist - App route
 Updated app.py
   Did: @app.route('/artists/<int:artist_id>')
+
+# Artist, Venue, Show - Create and edit routes
+Updated app.py
+  Did: Remaining TODOs
