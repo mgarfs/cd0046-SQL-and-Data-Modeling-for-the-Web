@@ -416,7 +416,7 @@ def search_artists():
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):
   # shows the artist page with the given artist_id
-  # TODO: replace with real artist data from the artist table, using artist_id
+  """
   data1={
     "id": 4,
     "name": "Guns N Petals",
@@ -489,6 +489,34 @@ def show_artist(artist_id):
     "upcoming_shows_count": 3,
   }
   data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
+  """
+  data={}
+  artist=Artist.query.get(artist_id)
+  data["id"]=artist.id
+  data["name"]=artist.name
+  data["genres"]=artist.genres
+  data["city"]=artist.city
+  data["state"]=artist.state
+  data["phone"]=artist.phone
+  data["website"]=artist.website
+  data["facebook_link"]=artist.facebook_link
+  data["seeking_venue"]=artist.seeking_venue
+  data["seeking_description"]=artist.seeking_description
+  data["image_link"]=artist.image_link
+  data["past_shows"]=[]
+  data["upcoming_shows"]=[]
+  for show in artist.shows:
+    venue={}
+    venue["venue_id"]=show.venue_id
+    venue["venue_name"]=show.venue.name
+    venue["venue_image_link"]=show.venue.image_link
+    venue["start_time"]=show.start_time.strftime("%m/%d/%Y, %H:%M:%S")
+    if show.start_time>datetime.now():
+      data["upcoming_shows"].append(venue.copy())
+    else:
+      data["past_shows"].append(venue.copy())
+  data["past_shows_count"]=len(data["past_shows"])
+  data["upcoming_shows_count"]=len(data["upcoming_shows"])
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update

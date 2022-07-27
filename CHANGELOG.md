@@ -30,7 +30,7 @@ Did a flask migration and update
 Created venues.sql and executed it manually against db
   NB: Assuming this is a first time run and that generated Venue id's will match other data!
 
-# Artists
+# Artists - Model
 Updated app.ppy
   Did: added columns to Artist(db.Model) and changed genres column
 
@@ -70,3 +70,7 @@ Updated app.py
 Updated app.py
   Did: @app.route('/venues/<venue_id>', methods=['DELETE']) and @app.route('/venues/search', methods=['POST'])
   NB: Venue delete route not tested
+
+# Artist - App route
+Updated app.py
+  Did: @app.route('/artists/<int:artist_id>')
