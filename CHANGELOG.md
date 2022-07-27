@@ -1,3 +1,4 @@
+# Initial Commit
 Created fyyur database as postgres os user:
   Did:
     sudo -u postgres -i
@@ -20,4 +21,11 @@ Initialized flask migrations and did initial migration:
       Venue
       alambic_version
 
+# Venues
+Updated app.py:
+  Did: added columns to Venue(db.Model)
+
+Did a flask migration and update
+
+Created venue.sql and executed it manually against db
 
