@@ -40,7 +40,7 @@ Created artists.sql and executed it manually against db
   NB: Also contains a column data type change!
   NB: Also contains selects to increase Arist id sequence to avoid future clashes!
 
-# Shows
+# Shows - Model
 Updated app.py
   Did:
     created Show(db.Model) with columns and foreign keys to Artist and Venue
@@ -57,3 +57,7 @@ Updated app.py:
 # Venue - App Route
 Updated app.py
   Did: @app.route('venues/<int:venue_id>')
+
+# Shows - App route
+Updated app.py
+  Did: @app.route('/shows')
