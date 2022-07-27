@@ -61,3 +61,7 @@ Updated app.py
 # Shows - App route
 Updated app.py
   Did: @app.route('/shows')
+
+# Artists - App route + Artist search
+Updated app.py
+  Did: @app.route('/artists') and @app.route('/artists/search', methods=['POST'])

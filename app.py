@@ -324,7 +324,7 @@ def delete_venue(venue_id):
 #  ----------------------------------------------------------------
 @app.route('/artists')
 def artists():
-  # TODO: replace with real data returned from querying the database
+  """
   data=[{
     "id": 4,
     "name": "Guns N Petals",
@@ -335,13 +335,21 @@ def artists():
     "id": 6,
     "name": "The Wild Sax Band",
   }]
+  """
+  data=[]
+  artists=Artist.query.order_by('id').all()
+  for artist in artists:
+    ao={}
+    ao["id"]=artist.id
+    ao["name"]=artist.name
+    data.append(ao.copy())
   return render_template('pages/artists.html', artists=data)
 
 @app.route('/artists/search', methods=['POST'])
 def search_artists():
-  # TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
   # seach for "A" should return "Guns N Petals", "Matt Quevado", and "The Wild Sax Band".
   # search for "band" should return "The Wild Sax Band".
+  """
   response={
     "count": 1,
     "data": [{
@@ -350,6 +358,24 @@ def search_artists():
       "num_upcoming_shows": 0,
     }]
   }
+  """
+  search="%{}%".format(request.form.get('search_term'))
+  artists=Artist.query.filter(Artist.name.ilike(search))
+  response={}
+  data=[]
+  for artist in artists:
+    ao={}
+    ao["id"]=artist.id
+    ao["name"]=artist.name
+    num_upcoming_shows=0
+    for show in artist.shows:
+      if show.start_time>datetime.now():
+        num_upcoming_shows+=1
+    ao["num_upcoming_shows"]=num_upcoming_shows
+    data.append(ao.copy())
+  response["count"]=len(data)
+  response["data"]=data
+  app.logger.info(response)
   return render_template('pages/search_artists.html', results=response, search_term=request.form.get('search_term', ''))
 
 @app.route('/artists/<int:artist_id>')
