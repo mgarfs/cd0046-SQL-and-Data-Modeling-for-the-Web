@@ -27,5 +27,15 @@ Updated app.py:
 
 Did a flask migration and update
 
-Created venue.sql and executed it manually against db
+Created venues.sql and executed it manually against db
+  NB: Assuming this is a first time run and that generated Venue id's will match other data!
 
+# Artists
+Updated app.ppy
+  Did: added columns to Artist(db.Model) and changed genres column
+
+Did a flask migration and update
+
+Created artists.sql and executed it manually against db
+  NB: Also contains a column data type change!
+  NB: Also contains selects to increase Arist id sequence to avoid future clashes!
