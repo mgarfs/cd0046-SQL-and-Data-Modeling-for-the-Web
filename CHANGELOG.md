@@ -39,3 +39,13 @@ Did a flask migration and update
 Created artists.sql and executed it manually against db
   NB: Also contains a column data type change!
   NB: Also contains selects to increase Arist id sequence to avoid future clashes!
+
+# Shows
+Updated app.py
+  Did:
+    created Show(db.Model) with columns and foreign keys to Artist and Venue
+    added relationships to show(s) from Artist and Venue to Show, respectively
+
+Did a flask migration and update
+
+Created shows.sql and executed it manually against db

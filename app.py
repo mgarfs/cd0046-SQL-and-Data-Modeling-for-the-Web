@@ -46,6 +46,7 @@ class Venue(db.Model):
     seeking_description = db.Column(db.String)
     # upcoming_shows (incl. _count) - derived from Shows (in the future)
     # past_shows (incl. _count) - dervied from Shows (in the past)
+    shows = db.relationship('Show', backref='venue', lazy=False)
 
 class Artist(db.Model):
     __tablename__ = 'Artist'
@@ -63,8 +64,15 @@ class Artist(db.Model):
     seeking_description = db.Column(db.String)
     # upcoming_shows (incl. _count) - derived from Shows (in the future)
     # past_shows (incl. _count) - derived from Shows (in the past)
+    shows = db.relationship('Show', backref='artist', lazy=False)
 
-# TODO Implement Show model, and complete all model relationships and properties, as a database migration.
+class Show(db.Model):
+    __tablename__ = 'Show'
+
+    id = db.Column(db.Integer, primary_key=True)
+    venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id'), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'), nullable=False)
+    start_time = db.Column(db.DateTime, nullable=False)
 
 #----------------------------------------------------------------------------#
 # Filters.
