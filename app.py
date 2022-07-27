@@ -179,7 +179,7 @@ def search_venues():
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
   # shows the venue page with the given venue_id
-  # TODO: replace with real venue data from the venues table, using venue_id
+  """
   data1={
     "id": 1,
     "name": "The Musical Hop",
@@ -258,6 +258,37 @@ def show_venue(venue_id):
     "upcoming_shows_count": 1,
   }
   data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
+  app.logger.info(data)
+  """
+  venue=Venue.query.get(venue_id)
+  data={}
+  data["id"]=venue.id
+  data["name"]=venue.name
+  data["genres"]=venue.genres
+  data["address"]=venue.address
+  data["city"]=venue.city
+  data["state"]=venue.state
+  data["phone"]=venue.phone
+  data["website"]=venue.website
+  data["facebook_link"]=venue.facebook_link
+  data["seeking_talent"]=venue.seeking_talent
+  data["seeking_description"]=venue.seeking_description
+  data["image_link"]=venue.image_link
+  data["past_shows"]=[] # to be retrieved
+  data["upcoming_shows"]=[] # to be retrieved
+  for show in venue.shows:
+    performance={}
+    performance["artist_id"]=show.artist_id
+    performance["artist_name"]=show.artist.name
+    performance["artist_image_link"]=show.artist.image_link
+    performance["start_time"]=show.start_time.strftime("%m/%d/%Y, %H:%M:%S")
+    if show.start_time>datetime.now():
+      data["upcoming_shows"].append(performance.copy())
+    else:
+      data["past_shows"].append(performance.copy())
+  data["past_shows_count"]=len(data["past_shows"])
+  data["upcoming_shows_count"]=len(data["upcoming_shows"])
+  app.logger.info(data)
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue

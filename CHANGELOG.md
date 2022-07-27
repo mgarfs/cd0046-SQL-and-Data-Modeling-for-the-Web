@@ -53,3 +53,7 @@ Created shows.sql and executed it manually against db
 # Venues - App route
 Updated app.py:
   Did: @app.route('/venues')
+
+# Venue - App Route
+Updated app.py
+  Did: @app.route('venues/<int:venue_id>')
