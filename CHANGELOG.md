@@ -21,7 +21,7 @@ Initialized flask migrations and did initial migration:
       Venue
       alambic_version
 
-# Venues
+# Venues - Model
 Updated app.py:
   Did: added columns to Venue(db.Model)
 
@@ -49,3 +49,7 @@ Updated app.py
 Did a flask migration and update
 
 Created shows.sql and executed it manually against db
+
+# Venues - App route
+Updated app.py:
+  Did: @app.route('/venues')
