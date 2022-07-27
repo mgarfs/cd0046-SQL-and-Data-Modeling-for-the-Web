@@ -65,3 +65,8 @@ Updated app.py
 # Artists - App route + Artist search
 Updated app.py
   Did: @app.route('/artists') and @app.route('/artists/search', methods=['POST'])
+
+# Venue - Delete route + Venue search
+Updated app.py
+  Did: @app.route('/venues/<venue_id>', methods=['DELETE']) and @app.route('/venues/search', methods=['POST'])
+  NB: Venue delete route not tested
