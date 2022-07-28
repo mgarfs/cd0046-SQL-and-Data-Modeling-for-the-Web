@@ -672,13 +672,24 @@ def edit_venue_submission(venue_id):
   try:
     venue=Venue.query.get(venue_id)
     venue.name=request.form['name']
-    venue.genres=request.form['genres']
+    genres=[]
+    for genre in request.form.getlist('genres'):
+      genres.append(genre)
+    venue.genres=genres
     venue.city=request.form['city']
     venue.state=request.form['state']
     venue.phone=request.form['phone']
     venue.website=request.form['website_link']
     venue.facebook_link=request.form['facebook_link']
-    venue.seeking_talent=request.form['seeking_talent']
+    if 'seeking_talent' in request.form:
+      seeking_talent_val=request.form['seeking_talent']
+      if seeking_talent_val=='y':
+        seeking_talent=True
+      else:
+        seeking_talent=False
+    else:
+      seeking_talent=False   
+    venue.seeking_talent=seeking_talent
     venue.seeking_description=request.form['seeking_description']
     venue.image_link=request.form['image_link']
     db.session.commit()

@@ -78,3 +78,7 @@ Updated app.py
 # Artist, Venue, Show - Create and edit routes
 Updated app.py
   Did: Remaining TODOs
+
+# Venue - Edit route
+Updated app.py
+  Did: fixed issue with seeking_talent in @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
